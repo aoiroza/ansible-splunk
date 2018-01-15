@@ -1,0 +1,6 @@
+- name: Install splunk universal forwarder
+  win_package:
+    path: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=windows&version=7.0.1&product=universalforwarder&filename=splunkforwarder-7.0.1-2b5b15c4ee89-x64-release.msi&wget=true'
+    validate_certs: no
+    arguments: AGREETOLICENSE=Yes /qn /norestart
+    state: present
