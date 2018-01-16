@@ -6,13 +6,17 @@
     force: no
 
 # MSI file with win_package      
-- name: Install splunk universal forwarder
-  win_package:
-    path: C:\splunkfwd.msi
-    arguments: AGREETOLICENSE=Yes /qn /norestart
-    state: present
-
-- name: Remove splunk universal forwarder
-  win_package:
-    path: C:\splunkfwd.msi
-    state: absent
+#- name: Install splunk universal forwarder
+#  win_package:
+#    path: C:\splunkfwd.msi
+#    arguments: AGREETOLICENSE=Yes /qn /norestart
+#    state: present
+#    notify:
+#      - clean splunkfwd.msi
+#
+#- name: Remove splunk universal forwarder
+#  win_package:
+#    path: C:\splunkfwd.msi
+#    state: absent
+#    notify:
+#      - clean splunkfwd.msi

@@ -1,0 +1,4 @@
+- name: clean splunkfwd.msi
+  win_file:
+    path: C:\splunkfwd.msi
+    state: absent
