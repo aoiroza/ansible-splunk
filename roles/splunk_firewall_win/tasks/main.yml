@@ -1,0 +1,13 @@
+- name: Firewall rules to allow Splunk
+  win_firewall_rule:
+    name: Splunk - {{ item }}
+    localport: "{{ item }}"
+    action: allow
+    direction: in
+    protocol: tcp
+    state: present
+    enabled: yes
+  with_items:
+    - 8000
+    - 8089
+    - 9997
