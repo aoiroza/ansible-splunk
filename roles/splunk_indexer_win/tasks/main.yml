@@ -1,22 +1,5 @@
-- name: Download splunk 
-  # Login requirements from splunk website might break this
-  win_get_url:
-    url: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=windows&version=7.0.1&product=splunk&filename=splunk-7.0.1-2b5b15c4ee89-x64-release.msi&wget=true'
-    dest: C:\splunk.msi
-    force: no
+---
 
-# MSI file with win_package      
-#- name: Install splunk 
-#  win_package:
-#    path: C:\splunk.msi
-#    arguments: AGREETOLICENSE=Yes /qn /norestart
-#    state: present
-#    notify:
-#      - clean splunk.msi
-#
-#- name: Remove splunk universal forwarder
-#  win_package:
-#    path: C:\splunk.msi
-#    state: absent
-#    notify:
-#      - clean splunk.msi
+- name: Copy config
+  debug:
+    msg: "Indexer task here"
