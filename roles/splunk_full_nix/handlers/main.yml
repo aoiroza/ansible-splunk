@@ -1,0 +1,4 @@
+- name: clean splunk.tgz
+  file:
+    path: /tmp/splunk.tgz
+    state: absent

@@ -1,0 +1,4 @@
+- name: clean splunkfwd.tgz
+  file:
+    path: /tmp/splunkfwd.tgz
+    state: absent
