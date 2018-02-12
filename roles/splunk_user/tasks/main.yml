@@ -1,0 +1,11 @@
+- name: Add splunk group
+  group:
+    name: splunk
+    state: present
+
+- name: Add splunk user
+  user:
+    name: splunk
+    state: present
+    createhome: no
+    home: /opt/splunk
