@@ -1,20 +1,14 @@
-- name: Download & install splunk 
+- name: Download splunk forwarder
   # Login requirements from splunk website might break this
   #
-  # rpm version
-  yum:
-    name: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.0.1&product=universalforwarder&filename=splunkforwarder-7.0.1-2b5b15c4ee89-linux-2.6-x86_64.rpm&wget=true'
-    state: present
-  when: (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+  get_url:
+    # tgz version (maybe consolidate on this download)
+    url: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.0.1&product=universalforwarder&filename=splunkforwarder-7.0.1-2b5b15c4ee89-Linux-x86_64.tgz&wget=true'
+    dest: /tmp/splunkfwd.tgz
+    force: no
 
-  # deb version
-  apt:
-    deb: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.0.1&product=universalforwarder&filename=splunkforwarder-7.0.1-2b5b15c4ee89-linux-2.6-amd64.deb&wget=true'
-    state: present
-  when: (ansible_distribution == "Debian") or (ansible_distribution == "Ubuntu")
-
-#  get_url:
-#    # tgz version (maybe consolidate on this download)
-#    url: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.0.1&product=universalforwarder&filename=splunkforwarder-7.0.1-2b5b15c4ee89-Linux-x86_64.tgz&wget=true'
-#    dest: /tmp/splunkfwd.tgz
-#    force: no
+- name: Install splunk forwarder
+    unarchive:
+    src: /tmp/splunkfwd.tgz
+    dest: /opt/splunkforwarder
+    remote_src: yes 
