@@ -10,5 +10,7 @@
 - name: Extract splunk
   unarchive:
     src: /tmp/splunk.tgz
-    dest: /opt/splunk
+    dest: /opt
     remote_src: yes
+#    owner: splunk
+#    group: splunk

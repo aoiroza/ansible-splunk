@@ -1,3 +1,7 @@
+- name: Set correct nologin path
+  set_fact: 
+    nolog_path: "{{ '/usr/sbin/nologin' if ansible_os_family == 'Debian' else '/sbin/nologin' }}"
+
 - name: Add splunk group
   group:
     name: splunk
@@ -7,5 +11,6 @@
   user:
     name: splunk
     state: present
-    createhome: no
+    createhome: yes
     home: /opt/splunk
+    shell: "{{ nolog_path }}"
