@@ -11,6 +11,7 @@
   user:
     name: splunk
     state: present
+    group: splunk
     createhome: yes
     home: /opt/splunk
     shell: "{{ nolog_path }}"
