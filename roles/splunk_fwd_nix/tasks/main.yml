@@ -1,3 +1,5 @@
+- set_fact:
+    deploy_server: 127.0.0.1:8089
 - name: Download splunk forwarder
   # Login requirements from splunk website might break this
   #
@@ -8,7 +10,28 @@
     force: no
 
 - name: Install splunk forwarder
-    unarchive:
+  unarchive:
     src: /tmp/splunkfwd.tgz
-    dest: /opt/splunkforwarder
+    dest: /opt
     remote_src: yes 
+
+- name: Enable boot start
+  command: /opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+  become_user: root
+  become: yes
+
+- name: Ensure splunk permissions
+  file:
+    path: /opt/splunkforwarder
+    owner: splunk
+    group: splunk
+    recurse: yes
+    state: directory
+  become_user: root
+  become: yes
+
+- name: Connect to Deployment Server
+  command: /opt/splunkforwarder/bin/splunk set deploy-poll {{ deploy_server }}
+
+- name: Start forwarder
+  command: /opt/splunkforwarder/bin/splunk start
