@@ -1,12 +1,13 @@
-- hosts: splunk
-
-- name: Open splunk ports with firewalld rules
-  firewalld:
-    state: enabled
-    port: 8000/tcp
-  firewalld:
-    state: enabled
-    port: 8089/tcp
-  firewalld:
-    state: enabled
-    port: 9997/tcp
+- block: 
+  - name: Open splunk ports with firewalld rules
+    firewalld:
+      state: enabled
+      port: 8000/tcp
+    firewalld:
+      state: enabled
+      port: 8089/tcp
+    firewalld:
+      state: enabled
+      port: 9997/tcp
+  become_user: root
+  become: yes

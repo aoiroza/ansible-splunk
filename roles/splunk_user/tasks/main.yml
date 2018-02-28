@@ -1,18 +1,21 @@
-- name: Set correct nologin path
-  set_fact: 
-    nolog_path: "{{ '/usr/sbin/nologin' if ansible_os_family == 'Debian' else '/sbin/nologin' }}"
-    home_path: "{{ '/opt/splunkforwarder' if forwarder else '/opt/splunk' }}"
-
-- name: Add splunk group
-  group:
-    name: splunk
-    state: present
-
-- name: Add splunk user
-  user:
-    name: splunk
-    state: present
-    group: splunk
-    createhome: yes
-    home: "{{ home_path }}"
-    shell: "{{ nolog_path }}"
+- block:
+  - name: Set correct nologin path
+    set_fact: 
+      nolog_path: "{{ '/usr/sbin/nologin' if ansible_os_family == 'Debian' else '/sbin/nologin' }}"
+      home_path: "{{ '/opt/splunkforwarder' if forwarder is defined and forwarder else '/opt/splunk' }}"
+  
+  - name: Add splunk group
+    group:
+      name: splunk
+      state: present
+  
+  - name: Add splunk user
+    user:
+      name: splunk
+      state: present
+      group: splunk
+      createhome: yes
+      home: "{{ home_path }}"
+      shell: "{{ nolog_path }}"
+  become_user: root
+  become: yes
