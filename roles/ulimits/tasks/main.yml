@@ -1,0 +1,22 @@
+---
+- name: Set ulimits for splunk user
+  lineinfile: 
+    path: /etc/security/limits.conf
+    line: 'splunk hard nofile 20240'
+    state: present
+  become_user: root
+  become: yes
+
+- lineinfile:
+    path: /etc/security/limits.conf
+    line: 'splunk soft nofile 10240'
+    state: present
+  become_user: root
+  become: yes
+
+- lineinfile:
+    path: /etc/security/limits.conf
+    line: 'splunk soft noproc 10240'
+    state: present
+  become_user: root
+  become: yes

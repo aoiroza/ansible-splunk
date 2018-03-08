@@ -1,5 +1,6 @@
 ---
 dependencies:
 - { role: splunk_user }
+- { role: ulimits }
 - { role: firewalld }
 - { role: thp }

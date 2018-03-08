@@ -3,10 +3,10 @@
     firewalld:
       state: enabled
       port: 8000/tcp
-    firewalld:
+  - firewalld:
       state: enabled
       port: 8089/tcp
-    firewalld:
+  - firewalld:
       state: enabled
       port: 9997/tcp
   become_user: root
