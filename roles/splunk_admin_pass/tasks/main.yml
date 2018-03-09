@@ -1,0 +1,3 @@
+---
+- name: Update splunk admin password
+  command: splunk edit user admin -password {{ new_pass }} -role admin -auth admin:{{ current_pass }}

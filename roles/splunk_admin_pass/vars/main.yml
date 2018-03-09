@@ -1,0 +1,2 @@
+current_pass: "{{ vault_current_pass }}"
+new_pass: "{{ vault_new_pass }}"
