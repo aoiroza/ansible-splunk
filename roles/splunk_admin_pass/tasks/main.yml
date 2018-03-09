@@ -1,3 +1,12 @@
 ---
+- name: Retrive splunk home
+  # Could possibly re-use a fact/variable here?
+  shell: grep splunk /etc/passwd | cut -d':' -f6
+  register: splunkhome
+
+- set_fact: 
+    home_path: "{{ splunkhome.stdout }}"
+  when: home_path is undefined
+
 - name: Update splunk admin password
-  command: splunk edit user admin -password {{ new_pass }} -role admin -auth admin:{{ current_pass }}
+  command: "{{ home_path }}/bin/splunk edit user admin -password {{ new_pass }} -role admin -auth admin:{{ current_pass }}"

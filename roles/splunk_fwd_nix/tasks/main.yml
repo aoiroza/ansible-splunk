@@ -14,11 +14,11 @@
     src: /tmp/splunkfwd.tgz
     dest: /opt
     remote_src: yes 
-    creates: /opt/splunkforwarder/splunkforwarder-7.0.1-2b5b15c4ee89-linux-x86_64-manifest
+    creates: /opt/splunkforwarder/splunkforwarder-7.0.1-2b5b15c4ee89-linux-2.6-x86_64-manifest
   register: extracted
 
 - name: Enable boot start
-  command: /opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+  command: /opt/splunkforwarder/bin/splunk enable boot-start --accept-license -user splunk
   become_user: root
   become: yes  
   when: extracted.changed
@@ -35,7 +35,7 @@
   when: extracted.changed
 
 - name: Connect to Deployment Server
-  command: /opt/splunkforwarder/bin/splunk set deploy-poll {{ deploy_server }}
+  command: /opt/splunkforwarder/bin/splunk set deploy-poll {{ deploy_server }} -auth admin:changeme
   when: extracted.changed
 
 - name: Start forwarder
