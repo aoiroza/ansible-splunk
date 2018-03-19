@@ -1,0 +1,10 @@
+---
+  # Forward SH logs to indexers
+- name: Copy outputs.conf template to $SPLUNK_HOME/system/local
+  # To be converted to template
+  copy:
+    src: files/outputs.j2
+    dest: /opt/splunk/etc/system/local/outputs.conf
+    owner: splunk
+    group: splunk
+    mode: u=rw,g=r,o=r

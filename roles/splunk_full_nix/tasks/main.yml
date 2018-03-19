@@ -11,11 +11,16 @@
     src: /tmp/splunk.tgz
     dest: /opt
     remote_src: yes
+    creates: /opt/splunk/splunk-7.0.2-03bbabbd5c0f-linux-2.6-x86_64-manifest
 #    owner: splunk
 #    group: splunk
 
 - name: Enable boot start
   #command: /opt/splunk/bin/splunk enable boot-start --accept-license -user splunk
-  command: /opt/splunk/bin/splunk enable boot-start --accept-license 
+  command: /opt/splunk/bin/splunk enable boot-start --accept-license -user splunk
   become_user: root
   become: yes
+
+- name: Start Splunk
+  #command: /opt/splunk/bin/splunk enable boot-start --accept-license -user splunk
+  command: /opt/splunk/bin/splunk start

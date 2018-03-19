@@ -14,6 +14,7 @@
       name: splunk
       state: present
       group: splunk
+      groups: adm
       createhome: yes
       home: "{{ home_path }}"
       shell: "{{ nolog_path }}"

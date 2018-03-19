@@ -1,11 +1,11 @@
 - set_fact:
-    deploy_server: 127.0.0.1:8089
+    deploy_server: 10.0.4.1:8089
 
 - name: Download splunk forwarder
   # Login requirements from splunk website might break this
   #
   get_url:
-    url: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.0.1&product=universalforwarder&filename=splunkforwarder-7.0.1-2b5b15c4ee89-Linux-x86_64.tgz&wget=true'
+    url: 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.0.2&product=universalforwarder&filename=splunkforwarder-7.0.2-03bbabbd5c0f-Linux-x86_64.tgz&wget=true'
     dest: /tmp/splunkfwd.tgz
     force: no
 
@@ -14,7 +14,7 @@
     src: /tmp/splunkfwd.tgz
     dest: /opt
     remote_src: yes 
-    creates: /opt/splunkforwarder/splunkforwarder-7.0.1-2b5b15c4ee89-linux-2.6-x86_64-manifest
+    creates: /opt/splunkforwarder/splunkforwarder-7.0.2-03bbabbd5c0f-linux-2.6-x86_64-manifest
   register: extracted
 
 - name: Enable boot start
